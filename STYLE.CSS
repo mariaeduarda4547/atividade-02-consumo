@@ -1,0 +1,87 @@
+body {
+    /* Fundo degradê suave e fonte moderna */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 15px;
+    /* Sombra para efeito "flutuante" */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 550px;
+    /* Transição suave para a sombra */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    color: #4a90e2;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.joke-container {
+    background-color: #f7f9fc;
+    border: 1px solid #e0e6ed;
+    border-radius: 12px;
+    padding: 2rem;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    font-size: 1.2em;
+    font-style: italic;
+    line-height: 1.6;
+    /* Transições suaves */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.joke-container p {
+    margin: 0;
+}
+
+#joke-button {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    /* Efeito de transição */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#joke-button:hover:not(:disabled) {
+    background-color: #357abd;
+    transform: scale(1.05); /* Aumenta um pouco ao passar o mouse */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+#joke-button:active:not(:disabled) {
+    transform: scale(1); /* Volta ao normal ao clicar */
+}
+
+/* Estilo para o botão desabilitado */
+#joke-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    transform: none;
+}
