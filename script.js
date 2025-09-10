@@ -1,56 +1,28 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const jokeContainer = document.getElementById('joke-container');
-    const jokeButton = document.getElementById('joke-button');
-    
-    const displayedJokeIds = [];
-    const MAX_HISTORY = 20;
+const piadas = [
+    "O que o pato disse para a pata? Vem Quá!",
+    "Qual é o peixe que anda de boné? O peixe-capitão.",
+    "Por que o jacaré tirou o filho da escola? Porque ele réptil de ano.",
+    "Onde o Tom Jobim esconde as notas? No bolso, é claro!",
+    "Por que o corvo é o melhor amigo do gato? Porque ele miado.",
+    "Qual é o cúmulo da sorte? Nascer em berço de ouro, e virar um peixe-dourado.",
+    "O que o pneu disse para o seu amigo? Estou cansado de tanto rodar.",
+    "O que a impressora disse para a outra? Essa folha é para mim, eu sou a xerife.",
+    "O que o tomate disse para a tomate? Você me deu um molho!",
+    "Qual é a cidade que não tem pão? Não sei, eu não sou padeiro.",
+    "O que o caderno de matemática disse para o de geografia? Tenho mil problemas para resolver.",
+    "Por que o louco não é um animal? Porque ele é um ser-humano."
+];
 
-    async function fetchJoke() {
-        const url = "https://v2.jokeapi.dev/joke/Programming,Misc,Pun,Spooky?blacklistFlags=racist&lang=pt";
-        
-        // Altera o texto do botão e o desabilita
-        jokeButton.textContent = "Carregando...";
-        jokeButton.disabled = true;
+const botaoGerarPiada = document.getElementById('joke-button');
+const containerPiada = document.getElementById('joke-container');
 
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Erro HTTP! Status: ${response.status}`);
-            }
+function gerarPiadaAleatoria() {
+    const indiceAleatorio = Math.floor(Math.random() * piadas.length);
+    const piadaAleatoria = piadas[indiceAleatorio];
+    containerPiada.innerHTML = `<p>${piadaAleatoria}</p>`;
+}
 
-            const data = await response.json();
+botaoGerarPiada.addEventListener('click', gerarPiadaAleatoria);
 
-            if (data.error) {
-                jokeContainer.innerHTML = `<p style="color:red;">${data.message}</p>`;
-                return;
-            }
-
-            if (displayedJokeIds.includes(data.id)) {
-                console.log('Piada repetida encontrada, buscando outra...');
-                return fetchJoke();
-            }
-            
-            displayedJokeIds.push(data.id);
-            if (displayedJokeIds.length > MAX_HISTORY) {
-                displayedJokeIds.shift();
-            }
-
-            if (data.type === "single") {
-                jokeContainer.innerHTML = `<p>${data.joke}</p>`;
-            } else if (data.type === "twopart") {
-                jokeContainer.innerHTML = `<p>${data.setup}</p><p>${data.delivery}</p>`;
-            }
-
-        } catch (error) {
-            jokeContainer.innerHTML = `<p style="color:red;">Ops, algo deu errado: ${error.message}</p>`;
-        } finally {
-            // Reabilita o botão e restaura o texto
-            jokeButton.textContent = "Gerar Outra Piada";
-            jokeButton.disabled = false;
-        }
-    }
-
-    jokeButton.addEventListener('click', fetchJoke);
-
-    fetchJoke();
-});
+// Gera uma piada inicial ao carregar a página
+gerarPiadaAleatoria();
